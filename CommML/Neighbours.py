@@ -12,14 +12,14 @@ class KNN:
 
     def predict(self, x):
         x = np.array(x)
-        self.dist = []
-        lex = len(self.x)
-        for i in range(lex):
+        self.distances = []
+        len_x = len(self.x)
+        for i in range(len_x):
             distance = np.sum((self.x[i] - x) ** 2)
-            self.dist.append([distance, self.y[i]])
+            self.distances.append([distance, self.y[i]])
 
-        self.dist.sort(key=lambda d: d[0])
-        nearest_k = self.dist[:self.k]
+        self.distances.sort(key=lambda d: d[0])
+        nearest_k = self.distances[:self.k]
         labels = [label for _, label in nearest_k]
         label_counts = Counter(labels)
 
