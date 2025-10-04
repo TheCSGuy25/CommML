@@ -1,3 +1,4 @@
+import numpy as np
 from collections import Counter
 
 class KNN:
@@ -5,19 +6,20 @@ class KNN:
         self.k = n
         self.x = self.y = None
 
-    def store(self, x , y ):
-        self.x = x
-        self.y = y
+    def store(self, x, y):
+        self.x = np.array(x)
+        self.y = np.array(y)
 
     def predict(self, x):
+        x = np.array(x)
         self.dist = []
         lex = len(self.x)
         for i in range(lex):
-            distance = (self.x[i][1] - x[1])**2 + (self.x[i][0] - x[0])**2 
+            distance = np.sum((self.x[i] - x) ** 2)
             self.dist.append([distance, self.y[i]])
 
         self.dist.sort(key=lambda d: d[0])
-        nearest_k  = self.dist[:self.k]
+        nearest_k = self.dist[:self.k]
         labels = [label for _, label in nearest_k]
         label_counts = Counter(labels)
 
