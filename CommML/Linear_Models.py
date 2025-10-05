@@ -116,12 +116,9 @@ class LogisticRegression:
             acc = (tp + tn) / (tp + tn + fp + fn)
             print(f"Epoch {epoch + 1}/{epochs} ........................................ Accuracy: {acc:.4f}")
 
-    def predict_prob(self, x):
-        x = np.array(x, dtype=np.float64)
-        return self.sigmoid(np.dot(x, self.theta))
-
     def predict(self, x):
-        probs = self.predict_prob(x)
-        return [1 if p >= 0.5 else 0 for p in probs]
+        x = np.array(x, dtype=np.float64)
+        probs = self.sigmoid(np.dot(x, self.theta))
+        return 1 if probs >= 0.5 else 0
 
 
