@@ -4,20 +4,19 @@ Thank you for your interest in contributing! All contributors are welcomed to im
 
 ## How to Contribute
 
-1. **Fork the repository**
-2. **Create a new branch** for your feature or bugfix
-3. **Commit your changes** with clear messages
-4. **Push to your fork**
-5. **Open a Pull Request** describing your changes
+1. **Create a issue**
+2. **Fork the repository**
+3. **Create a new branch** for your feature or bugfix
+4. **Commit your changes** with clear messages
+5. **Push to your fork**
+6. **Open a Pull Request** describing your changes
 
 ## Code Guidelines
 
 - Use `snake case` and descriptive variable names
 - Write clear, concise commit messages
-- Ensure all the test cases are passed 
 
 ## Reporting Issues
-
 - Search existing issues before opening a new one
 - Provide a clear, descriptive title and detailed information
 
