@@ -92,7 +92,7 @@ class LogisticRegression:
     def __init__(self):
         self.theta = None
         self.LR = 0.001
-
+        self.history = {"accuracy": []}
     def sigmoid(self, z_input):
         z_input = np.clip(z_input, -300, 300)
         return 1 / (1 + np.exp(-z_input))
@@ -122,7 +122,10 @@ class LogisticRegression:
                     pbar.update(1)
 
             acc = (tp + tn) / (tp + tn + fp + fn)
+            self.history["accuracy"].append(acc)
 
+            if any(np.isnan(w) or np.isinf(w) or w > 1e10 for w in self.theta):
+                return
     def predict(self, x):
         x = np.array(x, dtype=np.float64)
         probs = self.sigmoid(np.dot(x, self.theta))
