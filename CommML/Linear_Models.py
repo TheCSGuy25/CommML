@@ -50,7 +50,7 @@ class polynomial_regression:
         self.weights = []
         self.bias = 0.0
         self.learning_rate = 1e-7  
-
+        self.history = {"loss": []}
     def fit(self, x, y, epochs):
         x_len = len(x)
         number_of_features = len(x[0])
@@ -76,6 +76,10 @@ class polynomial_regression:
                 self.weights[i] -= self.learning_rate * (derivatives[i] / x_len)
 
             self.bias -= self.learning_rate * (bias_derivative / x_len)
+            
+            mse = np.mean((x.dot(self.weights) + self.bias - y)**2)
+            self.history["loss"].append(mse)
+
             if any(np.isnan(w) or np.isinf(w) or w > 1e10 for w in self.weights):
                 return
 
