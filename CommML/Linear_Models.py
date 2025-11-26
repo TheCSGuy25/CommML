@@ -6,6 +6,7 @@ class linear_regression:
         self.weights = []
         self.bias = 0.0
         self.learning_rate = 0.001
+        self.history = {"loss": []}
 
     def fit(self, x, y, epochs):
         data_size = len(x)
@@ -32,6 +33,9 @@ class linear_regression:
                 self.weights[i] -= self.learning_rate * derivatives[i]
 
             self.bias -= self.learning_rate * bias_derivative
+            
+            mse = np.mean((x.dot(self.weights) + self.bias - y)**2)
+            self.history["loss"].append(mse)
 
             if any([np.isnan(w) or np.isinf(w) or abs(w) > 1e10 for w in self.weights]):
                 return
