@@ -6,7 +6,6 @@ class linear_regression:
         self.weights = []
         self.bias = 0.0
         self.learning_rate = 0.001
-        self.history = {"loss": []}
 
     def fit(self, x, y, epochs=10):
         data_size = len(x)
@@ -56,39 +55,34 @@ class polynomial_regression:
         self.learning_rate = 1e-7  
         self.history = {"loss": []}
     def fit(self, x, y, epochs=10):
-        x_len = len(x)
-        number_of_features = len(x[0]) if type(x[0]) == list else 1
         x = np.array(x)
         y = np.array(y)
-        self.weights = np.zeros(number_of_features)
+
+        if x.ndim == 1:
+            x = x.reshape(-1, 1)
+
+        data_size, number_of_features = x.shape
+        self.weights = [0.0] * number_of_features
 
         for epoch in range(epochs):
-            derivatives = [0.0] * number_of_features
-            bias_derivative = 0.0
-
-            with tqdm(total=x_len, desc=f"Epoch {epoch+1}/{epochs}", unit="sample") as pbar:
-                for pos in range(x_len):
+            with tqdm(total=data_size, desc=f"Epoch {epoch+1}/{epochs}", unit="sample") as pbar:
+                for pos in range(data_size):
                     prediction = sum([self.weights[i] * (x[pos][i] ** (i + 1)) for i in range(number_of_features)]) + self.bias
-
                     for i in range(number_of_features):
-                        derivatives[i] += (-2/x_len) * (x[pos][i] ** (i + 1)) * (y[pos] - prediction)
-
-                    bias_derivative += (-2/x_len) * (y[pos] - prediction)
+                        self.weights[i] += (-2/data_size) * (x[pos][i] ** (i + 1)) * (y[pos] - prediction)
+                    self.bias += (-2/data_size) * (y[pos] - prediction)
                     pbar.update(1)
 
             for i in range(number_of_features):
-                self.weights[i] -= self.learning_rate * (derivatives[i] / x_len)
+                self.weights[i] -= self.learning_rate * (self.weights[i] / data_size)
 
-            self.bias -= self.learning_rate * (bias_derivative / x_len)
-            
-            mse = np.mean((x.dot(self.weights) + self.bias - y)**2)
-            self.history["loss"].append(mse)
+            self.bias -= self.learning_rate * (self.bias / data_size)
 
             if any(np.isnan(w) or np.isinf(w) or w > 1e10 for w in self.weights):
                 return
 
     def predict(self, x):
-        return sum([self.weights[i] * (x[0][i] ** (i + 1)) for i in range(len(self.weights))]) + self.bias
+        return sum([self.weights[i] * (x[i] ** (i + 1)) for i in range(len(self.weights))]) + self.bias if type(x) == list else self.weights[0] * (x) + self.bias
 
 
 
