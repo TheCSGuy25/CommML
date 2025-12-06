@@ -86,11 +86,10 @@ class polynomial_regression:
 
 
 
-class LogisticRegression:
+class logistic_regression:
     def __init__(self):
         self.theta = None
         self.LR = 0.001
-        self.history = {"accuracy": []}
     def sigmoid(self, z_input):
         z_input = np.clip(z_input, -300, 300)
         return 1 / (1 + np.exp(-z_input))
@@ -98,12 +97,16 @@ class LogisticRegression:
     def fit(self, x, y, epochs=10):
         x = np.array(x)
         y = np.array(y)
-        self.theta = np.zeros(x.shape[1])
+        if x.ndim == 1:
+            x = x.reshape(-1, 1)
+
+        data_size, number_of_features = x.shape
+        self.theta = np.zeros(number_of_features)
 
         for epoch in range(epochs):
             tp = tn = fp = fn = 0
-            with tqdm(total=len(x), desc=f"Epoch {epoch+1}/{epochs}", unit="sample") as pbar:
-                for i in range(len(x)):
+            with tqdm(total=data_size, desc=f"Epoch {epoch+1}/{epochs}", unit="sample") as pbar:
+                for i in range(data_size):
                     z = self.sigmoid(np.dot(self.theta, x[i]))
                     gradient = (z - y[i]) * x[i]
                     self.theta -= self.LR * gradient
@@ -118,9 +121,6 @@ class LogisticRegression:
                     elif pred == 0 and y[i] == 0:
                         tn += 1
                     pbar.update(1)
-
-            acc = (tp + tn) / (tp + tn + fp + fn)
-            self.history["accuracy"].append(acc)
 
             if any(np.isnan(w) or np.isinf(w) or w > 1e10 for w in self.theta):
                 return

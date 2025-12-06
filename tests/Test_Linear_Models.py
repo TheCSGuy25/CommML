@@ -42,3 +42,23 @@ def test_polynomial_regression(x, y, epochs):
         model.fit(x, y)
     y_pred = model.predict(x[0])
     assert y_pred is not None
+
+
+
+@pytest.mark.parametrize(
+    "x , y , epochs",
+    [
+        ([1,2,3], [1,0,1], 20),
+        ([1012.42, 123.42, 123.42], [1,0,0], 20),
+        ([1012.42, 123.42, 123.42], [1,0,0], None),
+        ([[1,2,3], [2,4,6]], [0,1,0], 20),
+    ]
+)
+def test_logitsitc_regression(x, y, epochs):
+    model = logistic_regression()
+    if epochs:
+        model.fit(x, y, epochs = epochs)
+    else:
+        model.fit(x, y)
+    y_pred = model.predict(x[0])
+    assert y_pred is not None
