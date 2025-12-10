@@ -24,8 +24,6 @@ class linear_regression:
 
             with tqdm(total=data_size, desc=f"Epoch {epoch+1}/{epochs}", unit="sample") as pbar:
                 for pos in range(data_size):
-
-                    print(f"weights: {self.weights}, x[pos]: {x[pos]}")
                     prediction = sum([self.weights[i] * x[pos][i] for i in range(number_of_features)]) + self.bias
 
                     for i in range(number_of_features):
