@@ -2,9 +2,14 @@
 A community developed ML Library
 
 ## Installation
-To install the CommML library from pip:
-```py
+To install the CommML library from `pip`:
+```bash
 pip install CommML
+```
+
+To install the CommML library from `uv`:
+```bash
+!uv pip install CommML
 ```
 
 ## Example Usage
