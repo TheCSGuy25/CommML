@@ -9,7 +9,7 @@ pip install CommML
 
 To install the CommML library from `uv`:
 ```bash
-!uv pip install CommML
+uv pip install CommML
 ```
 
 ## Example Usage
