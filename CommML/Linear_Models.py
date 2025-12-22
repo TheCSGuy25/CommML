@@ -8,6 +8,10 @@ class linear_regression:
         self.learning_rate = 0.001
 
     def fit(self, x, y, epochs=10):
+        
+        if len(x) != len(y):
+            raise ValueError("X and y must have the same length.")
+        
         data_size = len(x)
         x = np.array(x)
         y = np.array(y)
@@ -53,6 +57,9 @@ class polynomial_regression:
         self.learning_rate = 1e-7  
         self.history = {"loss": []}
     def fit(self, x, y, epochs=10):
+        if len(x) != len(y):
+            raise ValueError("X and y must have the same length.")
+        
         x = np.array(x)
         y = np.array(y)
 
@@ -93,6 +100,9 @@ class logistic_regression:
         return 1 / (1 + np.exp(-z_input))
 
     def fit(self, x, y, epochs=10):
+        if len(x) != len(y):
+            raise ValueError("X and y must have the same length.")
+        
         x = np.array(x)
         y = np.array(y)
         if x.ndim == 1:
