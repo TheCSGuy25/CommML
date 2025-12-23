@@ -68,7 +68,7 @@ def min_max_scaler(x):
     :return: A variable min output
     """
 
-    number_of_features = len(x[0]) if type(x) == list else 1
+    number_of_features = len(x[0]) if type(x[0]) == list else 1
     if number_of_features == 1:
         return [(x[i] - min(x)) / (max(x) - min(x)) for i in range((len(x)))]
     else:
