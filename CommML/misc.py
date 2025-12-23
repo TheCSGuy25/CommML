@@ -58,3 +58,31 @@ def train_test_split(x, y, train_size=0.8, test_size=None, random_state=42):
     y_test = y[test_idx]
 
     return x_train, x_test, y_train, y_test
+
+def min_max_scale(x):
+    """
+    Docstring for min_max_scale
+    
+    :param x: A variable feature length input
+    :return: A variable min output
+    """
+
+    number_of_features = len(x[0]) if type(x) == list else 1
+    if number_of_features == 1:
+        return [(x[i] - min(x)) / (max(x) - min(x)) for i in range((len(x)))]
+    else:
+        minimum = [min(x[i][j] for i in range(len(x))) for j in range(number_of_features)]
+        maximum = [max(x[i][j] for i in range(len(x))) for j in range(number_of_features)]
+
+        if any(maximum[i] == minimum[i] for i in range(number_of_features)):
+            raise ValueError("A minumum and maxium value is the same which leads to division by Zero")
+            return [
+                [(x[i][j] - minimum[j]) / (maximum[j] - minimum[j])
+                for j in range(number_of_features)]
+                for i in range(len(x))
+            ]
+        return [
+            [(x[i][j] - minimum[j]) / (maximum[j] - minimum[j])
+            for j in range(number_of_features)]
+            for i in range(len(x))
+        ]
