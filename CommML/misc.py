@@ -100,3 +100,9 @@ def mean_scaler(x):
             raise ValueError("A feature has equal min and max; division by zero.")
 
         return ((x - mean_x) / (max_x - min_x)).tolist()
+    
+
+
+def normalization(x):
+    x = np.array(x)
+    return (x - np.mean(x)) / np.std(x)
