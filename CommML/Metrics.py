@@ -45,3 +45,15 @@ def f1_score(y, y_pred):
     recall = get_recall(y,y_pred)
     f1 = 2 * ( (precision * recall) / (precision + recall))
     return f1
+
+def mean_squared_error(y, y_pred):
+    return 1 / len(y) * sum([(y - y_pred) ** 2 for y, y_pred in zip(y, y_pred)])
+
+def mean_absolute_error(y, y_pred):
+    return 1 / len(y) * sum([abs(y - y_pred) for y, y_pred in zip(y, y_pred)])
+
+def r2_score(y, y_pred):
+    return 1 - mean_squared_error(y, y_pred)
+
+def root_mean_squared_error(y, y_pred):
+    return mean_squared_error(y, y_pred) ** 0.5
