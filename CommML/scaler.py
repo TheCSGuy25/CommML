@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-def min_max_scaler(x):
+def normalization(x):
     """
     A scaling method that scales the values of X based on the 
     minumum and maximum value
@@ -43,8 +43,8 @@ def mean_scaler(x):
 
         return ((x - mean_x) / (max_x - min_x)).tolist()
     
-
-
-def normalization(x):
+def standard_scaler(x):
     x = np.array(x)
-    return (x - np.mean(x)) / np.std(x)
+    return ((x - np.mean(x)) / np.std(x)).tolist()
+
+
