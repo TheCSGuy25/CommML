@@ -10,13 +10,18 @@ class KNN:
         self.x = np.array(x)
         self.y = np.array(y)
 
-    def predict(self, x):
+    def predict(self, x, distance='euclidean'):
+
         x = np.array(x)
         self.distances = []
         len_x = len(self.x)
         for i in range(len_x):
-            distance = np.sum((self.x[i] - x) ** 2)
-            self.distances.append([distance, self.y[i]])
+            if distance == 'euclidean':
+                distance = np.sum((self.x[i] - x) ** 2)
+                self.distances.append([distance, self.y[i]])
+            else:
+                distance = np.sum(np.abs(self.x[i] - x))
+                self.distances.append([distance, self.y[i]])
 
         self.distances.sort(key=lambda d: d[0])
         nearest_k = self.distances[:self.k]
