@@ -134,5 +134,7 @@ class logistic_regression:
                 return
     def predict(self, x):
         x = np.array(x, dtype=np.float64)
-        probs = self.sigmoid(np.dot(x, self.theta))
-        return 1 if probs >= 0.5 else 0
+        if len(x.shape) == 1:
+            return 1 if self.sigmoid(np.dot(x, self.theta)) >= 0.5 else 0
+        else:
+            return [1 if self.sigmoid(np.dot(x[i], self.theta)) >= 0.5 else 0 for i in range(len(x))]

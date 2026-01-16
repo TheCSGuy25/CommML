@@ -31,18 +31,24 @@ def get_accuracy(y, y_pred):
 def get_precision(y, y_pred):
     matrix = get_confusion(y, y_pred)
     true_positive , false_positive = matrix[0][0] ,  matrix[0][1]
+    if true_positive + false_positive == 0:
+        return 0
     precision = (true_positive) / (true_positive + false_positive)
     return precision
 
 def get_recall(y,y_pred):
     matrix = get_confusion(y, y_pred)
     true_positive , false_negative = matrix[0][0] , matrix[1][0]
+    if true_positive + false_negative == 0:
+        return 0
     recall = (true_positive) / (true_positive + false_negative)
     return recall
 
 def f1_score(y, y_pred):
     precision = get_precision(y,y_pred)
     recall = get_recall(y,y_pred)
+    if precision + recall == 0:
+        return 0.0
     f1 = 2 * ( (precision * recall) / (precision + recall))
     return f1
 
