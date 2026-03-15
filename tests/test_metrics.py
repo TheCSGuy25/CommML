@@ -1,4 +1,4 @@
-from CommML.Metrics import *
+from CommML.metrics import *
 import pytest
 import math
 

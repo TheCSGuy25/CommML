@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from CommML.Neighbours import KNN   
+from CommML.neighbours import KNN   
 
 @pytest.fixture
 def simple_knn():
