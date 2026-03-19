@@ -1,6 +1,7 @@
 # __init__.py
-from .Linear_Models import *
-from .Metrics import *
+from .linear_models import *
+from .metrics import *
 from .misc import *
-from .Neighbours import *
+from .neighbours import *
 from .trees import *
+from .utils import *
