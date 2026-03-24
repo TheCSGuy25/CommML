@@ -11,8 +11,8 @@ from CommML.preprocessing import *
         [[1, 2, 3], [2, 4, 6]],
     ],
 )
-def test_normalization(x):
-    scaler = normalization()
+def test_min_max_scaler(x):
+    scaler = MinMaxScaler()
     scaled = scaler.fit_transform(x)
 
     assert scaled is not None

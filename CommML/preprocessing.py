@@ -1,6 +1,6 @@
 import numpy as np
 
-class normalization:
+class MinMaxScaler:
     def __init__(self):
         self.x_min = None
         self.x_max = None
