@@ -28,3 +28,21 @@ class MinMaxScaler:
         self.__fit(x)
         return self.transform(x)
         
+class MaxAbsScaler:
+    def __init__(self):
+        self.x_max = None
+    
+    def __fit(self, x):
+        x = np.array(x)
+        if x.ndim == 1:
+            self.x_max = np.max(np.abs(x))
+        elif x.ndim > 1:
+            self.x_max = np.max(np.abs(x), axis=0)
+
+    def transform(self, x):
+        x = np.array(x)
+        return x / self.x_max
+    
+    def fit_transform(self, x):
+        self.__fit(x)
+        return self.transform(x)
