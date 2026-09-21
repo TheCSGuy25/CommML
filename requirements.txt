@@ -1,0 +1,13 @@
+colorama
+exceptiongroup
+iniconfig
+numpy
+packaging
+pluggy
+Pygments
+pytest
+tomli
+tqdm
+typing_extensions
+scipy
+scikit-learn
